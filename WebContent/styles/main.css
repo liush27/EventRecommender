@@ -1,0 +1,237 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    color: #FFFFFF;
+    font-family: 'Catamaran', sans-serif;
+    overflow-x: hidden;
+    background: url('../images/gplaypattern.png');
+  }
+  
+  .container {
+    width: 100%;
+  }
+
+  .slidewrapper {
+    height: 150px;
+  }
+  .backslides {
+    background: url('../images/pjimage.jpg') repeat-x;
+    height: 100%;
+    width: 6300px;
+    animation: slide 60s linear infinite;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    opacity: 0.9;
+  }
+
+  @keyframes slide {
+    0% {transform: translate3d(0,0,0)}
+    100% {transform: translate3d(-2100px,0,0)}
+  }
+
+  .container > header p {
+      font-weight: 400;
+      font-size: 3em;
+      line-height: 1em;
+      padding: 25px 0;
+      text-align: center;
+      font-family: 'Black Ops One', cursive;
+      text-shadow: 3px 0 #174D86;
+  }
+  
+  .main-section {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      grid-column-gap: 20px;
+      grid-template-rows: auto;
+  }
+
+#item-nav {
+    grid-column: 1 / 2;
+    position: fixed;
+}
+
+  #item-list {
+    grid-column: 2 / 3;
+    color:       #174D86;
+    min-height:  350px;
+    padding:     10px;
+    margin: 10px;
+  }
+  
+  ul {
+    list-style: none;
+  }
+
+  .main-nav{
+    margin-top: 20px;
+    margin-left: 10px;
+  }
+  
+  .main-nav-btn {
+    border-bottom: 10px solid transparent;
+    color: #FBB534;
+    text-shadow: 1px 0 #174D86;
+    padding: 15px;
+    padding-right: 0;
+    margin-bottom: 30px;
+    text-decoration: none;
+    display: block;
+    font-family: 'Black Ops One', cursive;
+    font-size: 20px;
+    transform: rotate(-20deg);
+    transition: all .2s ease-in-out;
+  }
+  
+  .main-nav-btn:hover{
+    transform: scale(1.2);
+  }
+  
+  .main-nav-btn i{
+    width: 20px;
+  }
+  
+  .item {
+    align-items:   center;
+    border-bottom: 1px solid #FBB534;
+    display:       flex;
+    margin:        10px;
+    padding:       15px;
+  }
+  
+  .item:last-child{
+    border-bottom: none;
+  }  
+
+  .item img {
+    border: 1px solid #FFFFFF;
+    height: 80px;
+    width:  80px;
+  }
+  
+  .item > div:first-of-type {
+    flex:         1;
+    margin-left:  10px;
+    margin-right: 10px;
+  }
+
+  .item-name {
+    color:           #174D86;
+    font-weight:     600;
+    text-decoration: none;
+  }
+  
+  .item:hover {
+    background: rgba(255, 255, 255, 0.8);
+  }
+
+  .item-address {
+    line-height:   20px;
+    padding-right: 20px;
+    text-align:    right;
+  }
+
+.item-startDate {
+  padding-right: 20px;
+  text-align:        right;
+}
+
+  .stars {
+    align-items: center;
+    display:     flex;
+    padding-top: 10px;
+  }
+  
+  .fav-link {
+    color: #FBB534;
+    border-left: 1px solid #FFFFFF;
+    line-height: 60px;
+    text-align:  center;
+    width:       60px;
+  }
+  
+  .fav-link:hover {
+    text-shadow:0 0 3px #FBB534;
+    cursor: pointer;
+  }
+  
+  #footer {
+    font-size:  0.7em;
+    position:   fixed;
+    bottom: 0;
+    text-align: center;
+    padding-left: 35px;
+  }
+
+@media only screen and (max-width: 600px) {
+  .slidewrapper {
+    background-color: #FBB534;
+    height: 70px;
+  }
+
+  .container > header p {
+    font-size: 20px;
+    padding: 15px 0;
+    /*text-shadow: 1px 0 #D9E6D9;*/
+  }
+
+  .backslides {
+    background: none;
+  }
+
+  .main-section {
+    grid-template-columns: 100%;
+    grid-column-gap: 0;
+    grid-template-rows: 30px 1fr;
+  }
+
+  #item-nav {
+    grid-row: 1 / 2;
+  }
+
+  #item-list {
+    grid-column: 1 / span 3;
+    grid-row: 2 / span 2;
+    margin: 0;
+  }
+
+  .main-nav {
+    margin-top: 0;
+    margin-left: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+  }
+
+  .main-nav-btn {
+    border-bottom: 0;
+     padding: 5px;
+     margin-bottom: 0;
+     font-size: 12px;
+     transform: none;
+     transition: none;
+     color: #FBB534;
+  }
+  .main-nav-btn:hover{
+    transform: none;
+  }
+
+  #nearby-btn {
+    grid-column: 1 / 2;
+  }
+
+  #fav-btn {
+    grid-column: 2 / 3;
+  }
+
+  #recommend-btn {
+    grid-column: 3 / 4;
+  }
+}
