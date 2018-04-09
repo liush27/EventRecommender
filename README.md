@@ -58,7 +58,7 @@ personalization based recommendation system for event search.
   ```
   on server side to respond to client.
   
-## User behavior analysis
+## Geolocation-based user behavior analysis
   * use **ElasticSearch** stores all traffic logs of the system.
   * use **Logstash**(data processing pipeline) to realtime monitor request and log changes, filter results and save to ElasticSearch.
     * please check logstash pipeline file [**logstash_pipeline.conf**](./logstash_pipeline.conf). 
@@ -75,7 +75,7 @@ personalization based recommendation system for event search.
     * See [**Purify.java**](./src/offline/Purify.java) to parse tomcat_logs and save to mongoDB, [**FindPeak.java**](./src/offline/FindPeak.java) to do MapReduce jobs. See pseudo code of MapReduce below:
     ```
       function map(String url, String time):
-        If request url starts with /Titan:
+        If request url starts with /EventRecommender:
         emit (time, 1)
 
       function reduce(Iterable<Integer> values):
