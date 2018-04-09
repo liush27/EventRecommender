@@ -37,9 +37,10 @@ personalization based recommendation system for event search.
   ![image](https://user-images.githubusercontent.com/38120488/38480030-08dbcca2-3b91-11e8-8c90-184f7e818758.png)
 
 - MongoDB
-  * two collections( MongoDB collection == MySQL tables) 
+  * collections( MongoDB collection == MySQL tables) 
     * **users** - store user information and favorite history. 
     * **items** - store information and item-category relationship.
+    * **logs** - used in user behavior analysis to find peak time QPS of the system.
   * CRUD operations, please see [doc](https://docs.mongodb.com/manual/crud/)
 
 ## Implementation Details
@@ -60,15 +61,30 @@ personalization based recommendation system for event search.
 ## User behavior analysis
   * use **ElasticSearch** stores all traffic logs of the system.
   * use **Logstash**(data processing pipeline) to realtime monitor request and log changes, filter results and save to ElasticSearch.
-    * please check logstash pipeline file **logstash_pipeline.conf**. 
+    * please check logstash pipeline file [**logstash_pipeline.conf**](./logstash_pipeline.conf). 
     ![image](https://user-images.githubusercontent.com/38120488/38480242-651a17f2-3b92-11e8-9658-8da3b5a69fb2.png)
   * use **Kibana** to visualize ElasticSearch data.
-    * Display where do uers use our system
+    * Display where do users use our system
     ![image](https://user-images.githubusercontent.com/38120488/38480048-2f351ebc-3b91-11e8-9bc7-d0cf30effe3b.png)
   * **Offline log analysis to find peak time** using MongoDB MapReduce
     * One GET favorite request example in log to be analyzed.
     ```
-    73.223.210.212 - - [19/Aug/2017:22:00:24 +0000] "GET /eventRecommend/history?user_id=1111 HTTP/1.1" 200 11410
+    73.223.210.212 - - [19/Aug/2017:22:00:24 +0000] "GET /EventRecommender/history?user_id=1111 HTTP/1.1" 200 11410
     ```
+
+    * See [**Purify.java**](./src/offline/Purify.java) to parse tomcat_logs and save to mongoDB, [**FindPeak.java**](./src/offline/FindPeak.java) to do MapReduce jobs. See pseudo code of MapReduce below:
+    ```
+      function map(String url, String time):
+        If request url starts with /Titan:
+        emit (time, 1)
+
+      function reduce(Iterable<Integer> values):
+        return Array.sum(values)
+    ```
+    See a sample tested result:
+
+    ![image](https://user-images.githubusercontent.com/38120488/38509866-27e94506-3bf1-11e8-96f4-5c76089bc06e.png)
+
+
 
   
